@@ -3,7 +3,6 @@ export default [
     path: '/',
     component: '../layouts/BlankLayout',
     routes: [
-      // 登录
       {
         path: '/user',
         component: '../layouts/UserLayout',
@@ -15,7 +14,6 @@ export default [
           },
         ],
       },
-      // app
       {
         path: '/',
         component: '../layouts/SecurityLayout',
@@ -27,37 +25,40 @@ export default [
             routes: [
               {
                 path: '/',
-                redirect: '/dashboard/welcome',
+                redirect: '/welcome',
               },
-              // dashboard
               {
-                path: '/dashboard',
-                name: 'dashboard',
-                icon: 'home',
+                path: '/welcome',
+                name: 'welcome',
+                icon: 'smile',
+                component: './Welcome',
+              },
+              {
+                path: '/admin',
+                name: 'admin',
+                icon: 'crown',
+                component: './Admin',
+                authority: ['admin'],
                 routes: [
                   {
-                    path: '/dashboard/welcome',
-                    name: 'welcome',
+                    path: '/admin/sub-page',
+                    name: 'sub-page',
                     icon: 'smile',
                     component: './Welcome',
+                    authority: ['admin'],
                   },
-                ]
-              },
-              // list
-              {
-                path: '/list',
-                icon: 'table',
-                name: 'list',
-                routes: [
-                  {
-                    path: '/list/table-list',
-                    name: 'searchtable',
-                    component: './TableList',
-                  }
                 ],
               },
-              // 
-            ]
+              {
+                name: 'list.table-list',
+                icon: 'table',
+                path: '/list',
+                component: './TableList',
+              },
+              {
+                component: './404',
+              },
+            ],
           },
           {
             component: './404',

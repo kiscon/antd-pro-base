@@ -4,7 +4,7 @@
  * https://github.com/ant-design/ant-design-pro-layout
  */
 import ProLayout, { DefaultFooter } from '@ant-design/pro-layout';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { Fragment, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useIntl, connect, history } from 'umi';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { Result, Button } from 'antd';
@@ -112,7 +112,7 @@ const BasicLayout = (props) => {
       // 自定义头内容
       headerContentRender={(props) => {
         return (
-          <div
+          <span
             onClick={() => {
               const isCollapsed = !collapsed
               setCollapsed(isCollapsed)
@@ -124,7 +124,7 @@ const BasicLayout = (props) => {
             }}
           >
             {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-          </div>
+          </span>
         );
       }}
       // 自定义面包屑的数据
