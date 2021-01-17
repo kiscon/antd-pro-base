@@ -4,9 +4,9 @@
  * https://github.com/ant-design/ant-design-pro-layout
  */
 import ProLayout, { DefaultFooter } from '@ant-design/pro-layout';
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useIntl, connect, history } from 'umi';
-import { GithubOutlined } from '@ant-design/icons';
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { Result, Button } from 'antd';
 import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
@@ -41,26 +41,7 @@ const menuDataRender = (menuList) =>
 const defaultFooterDom = (
   <DefaultFooter
     copyright={`${new Date().getFullYear()} 前端技术预演`}
-    links={[
-      {
-        key: 'Ant Design Pro',
-        title: 'Ant Design Pro',
-        href: 'https://pro.ant.design',
-        blankTarget: true,
-      },
-      {
-        key: 'github',
-        title: <GithubOutlined />,
-        href: 'https://github.com/ant-design/ant-design-pro',
-        blankTarget: true,
-      },
-      {
-        key: 'Ant Design',
-        title: 'Ant Design',
-        href: 'https://ant.design',
-        blankTarget: true,
-      },
-    ]}
+    links={[]}
   />
 );
 
@@ -74,6 +55,7 @@ const BasicLayout = (props) => {
     },
   } = props;
   const menuDataRef = useRef([]);
+  const [collapsed, setCollapsed] = useState(false);
   useEffect(() => {
     if (dispatch) {
       dispatch({
@@ -92,8 +74,9 @@ const BasicLayout = (props) => {
         payload,
       });
     }
-  }; // get children authority
+  };
 
+  // get children authority
   const authorized = useMemo(
     () =>
       getMatchMenu(location.pathname || '/', menuDataRef.current).pop() || {
@@ -101,17 +84,21 @@ const BasicLayout = (props) => {
       },
     [location.pathname],
   );
+
   // useIntl 是最常用的 api,它可以获得 formatMessage 等 api 来进行具体的值绑定
   const { formatMessage } = useIntl();
+
   return (
     <ProLayout
       logo={logo}
       formatMessage={formatMessage}
       {...props}
       {...settings}
-      onCollapse={handleMenuCollapse}
+      // 折叠按钮
+      // onCollapse={handleMenuCollapse}
+      // 菜单的头部点击事件
       onMenuHeaderClick={() => history.push('/')}
-      // 菜单
+      // 自定义菜单项
       menuItemRender={(menuItemProps, defaultDom) => {
         if (
           menuItemProps.isUrl ||
@@ -120,10 +107,27 @@ const BasicLayout = (props) => {
         ) {
           return defaultDom;
         }
-
         return <Link to={menuItemProps.path}>{defaultDom}</Link>;
       }}
-      // 面包屑
+      // 自定义头内容
+      headerContentRender={(props) => {
+        return (
+          <div
+            onClick={() => {
+              const isCollapsed = !collapsed
+              setCollapsed(isCollapsed)
+              handleMenuCollapse(isCollapsed)
+            }}
+            style={{
+              cursor: 'pointer',
+              fontSize: '16px',
+            }}
+          >
+            {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+          </div>
+        );
+      }}
+      // 自定义面包屑的数据
       breadcrumbRender={(routers = []) => [
         {
           path: '/',
@@ -133,6 +137,7 @@ const BasicLayout = (props) => {
         },
         ...routers,
       ]}
+      // 自定义面包屑
       itemRender={(route, params, routes, paths) => {
         const first = routes.indexOf(route) === 0;
         return first ? (
@@ -141,9 +146,13 @@ const BasicLayout = (props) => {
           <span>{route.breadcrumbName}</span>
         );
       }}
+      // 自定义页脚
       footerRender={() => defaultFooterDom}
+      // 用来自定义 menuData
       menuDataRender={menuDataRender}
+      // 自定义头右部
       rightContentRender={() => <RightContent />}
+      // 在显示前对菜单数据进行查看，修改不会触发重新渲染
       postMenuData={(menuData) => {
         menuDataRef.current = menuData || [];
         return menuData || [];
