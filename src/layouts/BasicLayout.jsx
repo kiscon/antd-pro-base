@@ -10,6 +10,7 @@ import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { Result, Button } from 'antd';
 import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
+import SettingDrawer from '@/components/SettingDrawer';
 import { getMatchMenu } from '@umijs/route-utils';
 import logo from '../assets/logo.png';
 
@@ -161,6 +162,7 @@ const BasicLayout = (props) => {
       <Authorized authority={authorized.authority} noMatch={noMatch}>
         {children}
       </Authorized>
+      <SettingDrawer />
     </ProLayout>
   );
 };
