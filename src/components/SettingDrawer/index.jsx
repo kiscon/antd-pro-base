@@ -39,20 +39,10 @@ const SettingDrawer = (props) => {
   const { navTheme, primaryColor, layout, colorWeak } = settings;
   const { formatMessage } = useIntl();
   const [ collapse, setCollapse ] = useState(false);
- 
-  const handleMenuCollapse = (payload) => {
-    if (dispatch) {
-      dispatch({
-        type: 'global/changeLayoutCollapsed',
-        payload,
-      });
-    }
-  };
 
   const togglerContent = () => {
-    const isCollapsed = !collapse
-    setCollapse(isCollapsed)
-    handleMenuCollapse(collapse)
+    const isCollapsed = !collapse;
+    setCollapse(isCollapsed);
   };
 
   const changeSetting = (key, value) => {
