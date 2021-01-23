@@ -12,7 +12,7 @@ import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import SettingDrawer from '@/components/SettingDrawer';
 import { getMatchMenu } from '@umijs/route-utils';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo.svg';
 
 const noMatch = (
   <Result
