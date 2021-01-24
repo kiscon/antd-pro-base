@@ -56,5 +56,5 @@ export default {
   'menu.apply': '演示功能',
   'menu.apply.basicform': '基础表单',
   'menu.apply.searchtable': '基础表格',
-  'menu.apply.detailform': '查看详情',
+  'menu.apply.detailform': '基础详情',
 };

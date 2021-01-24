@@ -101,13 +101,13 @@ export default [
                     name: 'searchtable',
                     component: './Apply/BaseList',
                   },
-                  // {
-                  //   path: '/apply/base-detail',
-                  //   name: 'detailform',
-                  //   //不显示详情页菜单
-                  //   hideInMenu: true,
-                  //   component: './apply/baseDetail',
-                  // },
+                  {
+                    path: '/apply/base-detail',
+                    name: 'detailform',
+                    // 不显示详情页菜单
+                    // hideInMenu: true,
+                    component: './apply/baseDetail',
+                  },
                 ],
               },
             ]
