@@ -53,8 +53,8 @@ export default {
   'menu.test.basicform': '基础表单',
   'menu.test.searchtable': '查询表格(跨域)',
   // 演示功能
-  'menu.dev': '演示功能',
-  'menu.dev.basicform': '新增表单',
-  'menu.dev.searchtable': '查询表格(RESTful)',
-  'menu.dev.detailform': '查看详情',
+  'menu.apply': '演示功能',
+  'menu.apply.basicform': '基础表单',
+  'menu.apply.searchtable': '基础表格',
+  'menu.apply.detailform': '查看详情',
 };

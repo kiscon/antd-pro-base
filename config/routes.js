@@ -85,6 +85,31 @@ export default [
                   },
                 ],
               },
+              // 开发功能
+              {
+                path: '/apply',
+                icon: 'check-square',
+                name: 'apply',
+                routes: [
+                  {
+                    path: '/apply/basic-form',
+                    name: 'basicform',
+                    component: './Apply/BaseForm',
+                  },
+                  {
+                    path: '/apply/base-list',
+                    name: 'searchtable',
+                    component: './Apply/BaseList',
+                  },
+                  // {
+                  //   path: '/apply/base-detail',
+                  //   name: 'detailform',
+                  //   //不显示详情页菜单
+                  //   hideInMenu: true,
+                  //   component: './apply/baseDetail',
+                  // },
+                ],
+              },
             ]
           },
           {
