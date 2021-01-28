@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'antd';
 import { PageContainer } from '@ant-design/pro-layout';
-import BaseDetail from '@/components/BaseDetail';
+import BaseDetail from '@/components/XForm/detail';
 import InfoList from '@/components/InfoList';
 
 const useMode = [
