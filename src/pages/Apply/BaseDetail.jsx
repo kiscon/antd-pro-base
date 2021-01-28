@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button } from 'antd';
 import { PageContainer } from '@ant-design/pro-layout';
 import BaseDetail from '@/components/BaseDetail';
+import InfoList from '@/components/InfoList';
 
 const useMode = [
   {
@@ -33,6 +34,31 @@ const configs = [
   }
 ]
 
+const dataList = [
+  {
+    label: '姓名',
+    value: 'k',
+    key: 'name'
+  },
+  {
+    label: '电话',
+    value: '13566668888',
+    key: 'telephone'},
+  {
+    label: '年龄',
+    value: '18',
+    key: 'age'
+  },
+  {
+    label: '性别',
+    value: '1',
+    key: 'sex',
+    format: (v) => {
+      return v ? v === '1' ? '男' : '女' :''
+    }
+  },
+]
+
 class Detail extends Component {
   state = {
     formData: {
@@ -47,7 +73,7 @@ class Detail extends Component {
         ghost
         header={{
           title: '基础详情',
-          }}
+        }}
         style={{
           backgroundColor: '#fff',
           padding: 24
@@ -56,6 +82,10 @@ class Detail extends Component {
         <BaseDetail
           configs={configs}
           formData={this.state.formData}
+        />
+        <InfoList
+          list={dataList}
+          col={'2'}
         />
       </PageContainer>
     );
