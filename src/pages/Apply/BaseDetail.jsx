@@ -43,7 +43,8 @@ const dataList = [
   {
     label: '电话',
     value: '13566668888',
-    key: 'telephone'},
+    key: 'telephone'
+  },
   {
     label: '年龄',
     value: '18',
@@ -54,7 +55,7 @@ const dataList = [
     value: '1',
     key: 'sex',
     format: (v) => {
-      return v ? v === '1' ? '男' : '女' :''
+      return v ? v === '1' ? '男' : '女' : ''
     }
   },
 ]
