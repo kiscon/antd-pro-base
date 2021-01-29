@@ -22,7 +22,7 @@ class XForm extends Component {
         layout: 'horizontal',
         autoComplete: 'off',
         labelCol: {
-          span: 3
+          span: 2
         },
         wrapperCol: {
           span: 7

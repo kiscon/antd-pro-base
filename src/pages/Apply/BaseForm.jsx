@@ -68,10 +68,9 @@ const formList = [
 ]
 
 const BaseForm = () => {
-  let [formModel, setFormModel] = useState(formList)
-  const form = createRef()
+  let [formModel, setFormModel] = useState(formList);
+  const form = createRef();
   // useEffect(() => {
-    
   // }, [])
 
   return (

@@ -108,6 +108,11 @@ export default [
                     // hideInMenu: true,
                     component: './apply/baseDetail',
                   },
+                  {
+                    path: '/apply/base-map',
+                    name: 'searchmap',
+                    component: './Apply/BaseMap',
+                  },
                 ],
               },
             ]
