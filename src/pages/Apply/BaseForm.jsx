@@ -14,19 +14,26 @@ const formList = [
   {
     type: 'input',
     label: '姓名',
-    // disabled: () => true,
-    prop: 'pname'
+    prop: 'pname',
+    rules: [
+      { required: true, message: '必填项' }
+    ]
   },
   {
     type: 'input',
     label: '登录名',
-    prop: 'loginName'
+    prop: 'loginName',
+    disabled: (v) => {
+      // console.log(v);
+      return !v.pname
+    }
   },
   {
     type: 'input',
     label: '密码',
     prop: 'repassword',
     disabled: true,
+    show: (v) => !!v.pname,
     attrs: {}
   },
   {
@@ -74,10 +81,32 @@ const BaseForm = () => {
         title: '基础表单',
       }}
     >
+      <h3>Form</h3>
       <XForm
         ref={form}
         formModel={formModel}
+        buttons={[
+          {
+            label: '提交',
+            type: 'primary',
+            func: async () => {
+              let valid = await form.current.validate();
+              console.log(valid);
+            }
+          },
+          {
+            label: '重置',
+            func: () => form.current?.reset()
+          }
+        ]}
+        options={{
+          style: {
+            backgroundColor: '#fff',
+            padding: 24
+          }
+        }}
       />
+      <h3>ProForm</h3>
       <ProForm
         labelCol={{ span: 3 }}
         layout="horizontal"

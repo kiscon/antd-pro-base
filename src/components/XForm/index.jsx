@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, Select, Radio, Checkbox, DatePicker } from 'antd';
+import { Form, Input, Select, Radio, Checkbox, DatePicker, Button } from 'antd';
 import './index.less';
 
 const ComponetsMap = {
@@ -64,6 +64,9 @@ class XForm extends Component {
               </Form.Item>) : null
           ))
         }
+        {
+          this.props.buttons ? this.setButton(this.props.buttons, formConfig) : null
+        }
       </Form>
     )
   }
@@ -101,6 +104,35 @@ class XForm extends Component {
         </Select.Option>
       )
     })
+  }
+
+  setButton(v, config) {
+    return (
+      <Form.Item
+        wrapperCol={{
+          offset: config.labelCol ? config.labelCol.span : 3,
+          span: config.wrapperCol ? config.wrapperCol.span : 7
+        }}
+      >
+        {
+          v.map((e, index) => {
+            return (
+              <Button
+                {...v.attrs}
+                key={index}
+                type={e.type}
+                onClick={e.func && e.func.bind(this, this.formRef, e)}
+                style={{
+                  marginRight: 20
+                }}
+              >
+                {e.label}
+              </Button>
+            ) 
+          })
+        }
+      </Form.Item>
+    )
   }
   
   handleChange($event, v) {
