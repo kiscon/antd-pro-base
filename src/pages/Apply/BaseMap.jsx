@@ -1,12 +1,7 @@
-import React, { useState, createRef } from 'react';
+import React, { useState, useEffect, createRef } from 'react';
+import { PageContainer } from '@ant-design/pro-layout';
 import QueryForm from '@/components/XForm/query';
-import {
-  QueryFilter,
-  ProFormText,
-  ProFormDatePicker,
-  ProFormDateRangePicker,
-  ProFormSelect,
-} from '@ant-design/pro-form';
+import { aMapAk } from '@/utils/common';
 
 const formList = [
   {
@@ -22,7 +17,7 @@ const formList = [
     label: '登录名',
     prop: 'loginName',
     disabled: (v) => {
-      console.log(v);
+      // console.log(v);
       return !v.pname
     }
   },
@@ -52,7 +47,13 @@ const formList = [
   {
     type: 'dateRange',
     label: '日期区间',
-    prop: 'selectTime'
+    prop: 'selectDate',
+    attrs: {
+      transform: (value) => ({
+        startTime: value[0],
+        endTime: value[1]
+      })
+    }
   },
   {
     type: 'dateYear',
@@ -63,6 +64,11 @@ const formList = [
     type: 'dateMonth',
     label: '月份',
     prop: 'month'
+  },
+  {
+    type: 'dateTime',
+    label: '时间',
+    prop: 'selectTime'
   },
   {
     type: 'select',
@@ -104,13 +110,40 @@ const formList = [
 ]
 
 const BaseMap = () => {
-
-  let [formModel, setFormModel] = useState(formList);
   const form = createRef();
+  const [formModel, setFormModel] = useState(formList);
+  const [map, setMap] = useState(null);
 
+  const initMap = () => {
+    const map = new AMap.Map('Map', {
+      resizeEnable: true,
+      center: [117.000923, 36.675807],
+      zoom: 5,
+      expandZoomRange: true
+    })
+    AMap.plugin([
+      'AMap.ToolBar',
+      'AMap.Scale'
+    ], () => {
+      map.addControl(new AMap.ToolBar())
+      map.addControl(new AMap.Scale())
+    })
+    setMap(map)
+  }
+
+  useEffect(() => {
+    aMapAk().then(_ => initMap())
+  }, [])
+
+
+  
   return (
-    <div>
-      <h3>QueryForm</h3>
+    <PageContainer
+      ghost
+      header={{
+        title: '基础地图',
+      }}
+    >
       <QueryForm
         ref={form}
         formModel={formModel}
@@ -121,28 +154,17 @@ const BaseMap = () => {
         }}
       >
       </QueryForm>
-      <h3>QueryFilter</h3>
-      <QueryFilter
-        labelWidth={120}
-        onFinish={async (values) => {
-          console.log(values.name);
+      <div
+        id="Map"
+        style={{
+          height: 500,
+          width: '100%',
+          backgroundColor: '#f5f6f8',
+          marginTop: 24
         }}
       >
-        <ProFormText name="name1" label="应用名称" rules={[{ required: true }]} />
-        <ProFormText name="creater1" label="创建人" />
-        <ProFormSelect
-          name="sex"
-          label="性别"
-          valueEnum={{
-            man: '男',
-            woman: '女',
-          }}
-        />
-        <ProFormText name="status1" label="应用状态" />
-        <ProFormDatePicker name="startdate" label="响应日期" />
-        <ProFormDateRangePicker name="create" label="创建时间" />
-      </QueryFilter>
-    </div>
+      </div>
+    </PageContainer>
   )
 }
 

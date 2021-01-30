@@ -10,6 +10,7 @@ import {
   ProFormDateTimePicker,
   ProFormDateTimeRangePicker,
 } from '@ant-design/pro-form';
+import './query.less';
 
 const ComponetsMap = {
   input: ProFormText,
@@ -55,6 +56,7 @@ class QueryForm extends Component {
     })
     return (
       <QueryFilter
+        className="queryFilter"
         {...formConfig}
         onValuesChange={(curVal, values) => this.handleChange(curVal, values)}
       >
