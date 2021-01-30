@@ -83,7 +83,7 @@ class XForm extends Component {
         {...(v.attrs || {})}
         disabled={v.disabled}
         placeholder={this.setPlaceholder(v)}
-        allowClear={v.hasOwnProperty('clearable') ? v.clearable : true}
+        allowClear={v.hasOwnProperty('allowClear') ? v.allowClear : true}
         onChange={($event) => { this.handleChange($event, v) }}
       >
         {

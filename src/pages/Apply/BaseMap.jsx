@@ -22,7 +22,7 @@ const formList = [
     label: '登录名',
     prop: 'loginName',
     disabled: (v) => {
-      // console.log(v);
+      console.log(v);
       return !v.pname
     }
   },
@@ -53,6 +53,16 @@ const formList = [
     type: 'dateRange',
     label: '日期区间',
     prop: 'selectTime'
+  },
+  {
+    type: 'dateYear',
+    label: '年份',
+    prop: 'year'
+  },
+  {
+    type: 'dateMonth',
+    label: '月份',
+    prop: 'month'
   },
   {
     type: 'select',

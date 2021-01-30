@@ -17,11 +17,13 @@ const ComponetsMap = {
   radio: ProFormRadio,
   checkbox: ProFormCheckbox,
   date: ProFormDatePicker,
-  time: ProFormDateTimePicker,
+  dateTime: ProFormDateTimePicker,
+  dateMonth: ProFormDatePicker.Month,
+  dateYear: ProFormDatePicker.Year,
   radioGroup: ProFormRadio.Group,
   checkBoxGroup: ProFormCheckbox.Group,
   dateRange: ProFormDateRangePicker,
-  timeRange: ProFormDateTimeRangePicker,
+  dateTimeRange: ProFormDateTimeRangePicker,
 }
 
 class QueryForm extends Component {
@@ -54,6 +56,7 @@ class QueryForm extends Component {
     return (
       <QueryFilter
         {...formConfig}
+        onValuesChange={(curVal, values) => this.handleChange(curVal, values)}
       >
         {
           formModel.map((v, index) => (
@@ -80,21 +83,19 @@ class QueryForm extends Component {
         disabled={v.disabled}
         placeholder={this.setPlaceholder(v)}
         {...(v.attrs || {})}
-        // onChange={($event) => { this.handleChange($event, v) }}
       >
       </Component>
     )
   }
 
-  handleChange($event, v) {
-    let value = $event && $event.target ? $event.target.value : $event
+  handleChange(curVal, values) {
     this.setState({
       formData: {
         ...this.state.formData,
-        [v.prop]: value
+        ...curVal
       }
     }, () => {
-      v.onChange && v.onChange(value, this.state.formData)
+      this.props.onValuesChange && this.props.onValuesChange(curVal, values)
     })
   }
 
@@ -109,14 +110,18 @@ class QueryForm extends Component {
     if (v.attrs && v.attrs.hasOwnProperty('placeholder')) {
       return v.attrs.placeholder
     }
+    if (v.type === 'input') {
+      return `请输入${v.label}`
+    }
     return {
-      input: `请输入${v.label}`,
-      textarea: `请输入${v.label}`,
       select: `请选择${v.label}`,
       date: `请选择${v.label}`,
+      dateTime: `请选择${v.label}`,
+      dateYear: `请选择${v.label}`,
+      dateMonth: `请选择${v.label}`,
       dateRange: [`请选择`, `请选择`],
-      timeRange: [`请选择`, `请选择`],
-    }[v.type] || ''
+      dateTimeRange: [`请选择`, `请选择`],
+    }[v.type] || '请选择'
   }
 
 }
