@@ -45,13 +45,12 @@ const errorHandler = (error) => {
 
   return response;
 };
+
 /**
  * 配置request请求时的默认参数
  */
-
 const request = extend({
-  errorHandler,
-  // 默认错误处理
-  credentials: 'include', // 默认请求是否带上cookie
+  errorHandler, // 默认错误处理
+  credentials: 'omit', // 默认请求是否带上cookie
 });
 export default request;

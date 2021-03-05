@@ -4,7 +4,7 @@
  * https://github.com/ant-design/ant-design-pro-layout
  */
 import ProLayout, { DefaultFooter } from '@ant-design/pro-layout';
-import React, { Fragment, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { Link, useIntl, connect, history } from 'umi';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { Result, Button } from 'antd';
@@ -40,10 +40,7 @@ const menuDataRender = (menuList) =>
   });
 
 const defaultFooterDom = (
-  <DefaultFooter
-    copyright={`${new Date().getFullYear()} 前端技术预演`}
-    links={[]}
-  />
+  <DefaultFooter copyright={`${new Date().getFullYear()} 前端技术预演`} links={[]} />
 );
 
 const BasicLayout = (props) => {
@@ -57,13 +54,6 @@ const BasicLayout = (props) => {
   } = props;
   const menuDataRef = useRef([]);
   const [collapsed, setCollapsed] = useState(false);
-  useEffect(() => {
-    if (dispatch) {
-      dispatch({
-        type: 'user/fetchCurrent',
-      });
-    }
-  }, []);
   /**
    * init variables
    */
@@ -111,13 +101,13 @@ const BasicLayout = (props) => {
         return <Link to={menuItemProps.path}>{defaultDom}</Link>;
       }}
       // 自定义头内容
-      headerContentRender={(props) => {
+      headerContentRender={() => {
         return (
           <span
             onClick={() => {
-              const isCollapsed = !collapsed
-              setCollapsed(isCollapsed)
-              handleMenuCollapse(isCollapsed)
+              const isCollapsed = !collapsed;
+              setCollapsed(isCollapsed);
+              handleMenuCollapse(isCollapsed);
             }}
             style={{
               cursor: 'pointer',
