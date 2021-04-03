@@ -32,6 +32,19 @@ const Login = (props) => {
     });
   };
 
+  // const handleSubmitMock = (v) => {
+  //   const { dispatch } = props;
+  //   const values = {
+  //     autoLogin: v.autoLogin,
+  //     password: v.password,
+  //     type: 'account',
+  //     userName: v.account,
+  //   }
+  //   dispatch({
+  //     type: 'login/login',
+  //     payload: { ...values },
+  //   });
+  // };
   return (
     <div className={styles.main}>
       <ProForm
@@ -49,7 +62,8 @@ const Login = (props) => {
           },
         }}
         onFinish={(values) => {
-          console.log(values);
+          // console.log(values);
+          // handleSubmitMock(values);
           handleSubmit({
             password: aesEncrypt(values.password),
             account: values.account,
@@ -109,7 +123,7 @@ const Login = (props) => {
                 size: 'large',
                 prefix: <LockTwoTone className={styles.prefixIcon} />,
               }}
-              placeholder="密码: 111111"
+              placeholder="密码: ant.design"
               rules={[
                 {
                   required: true,

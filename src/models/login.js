@@ -1,6 +1,6 @@
 import { stringify } from 'querystring';
 import { history } from 'umi';
-import { fakeAccountLogin, accountLogin } from '@/services/login';
+import { fakeAccountLogin } from '@/services/login';
 import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 import { setToken, setUserInfo } from '@/utils/userCache';
@@ -13,14 +13,19 @@ const Model = {
   },
   effects: {
     *loginFn({ payload }) {
-      const res = yield call(accountLogin, payload);
-      if (res.code === 0) {
-        const data = res.data || {};
-        setToken(data.token);
-        setUserInfo(data);
-        message.success('🎉 🎉 🎉  登录成功！');
-        history.replace('/');
-      }
+      const data = yield Promise.resolve(payload);
+      setToken(window.btoa(data));
+      setUserInfo(data);
+      message.success('🎉 🎉 🎉  登录成功！');
+      history.replace('/');
+      // const res = yield call(accountLogin, payload);
+      // if (res && res.code === 0) {
+      //   const data = res.data || {};
+      //   setToken(data.token);
+      //   setUserInfo(data);
+      //   message.success('🎉 🎉 🎉  登录成功！');
+      //   history.replace('/');
+      // }
     },
     *login({ payload }, { call, put }) {
       const response = yield call(fakeAccountLogin, payload);
