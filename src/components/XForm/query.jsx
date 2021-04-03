@@ -49,7 +49,7 @@ class QueryForm extends Component {
     let formModel = this.props.formModel || [];
     formModel = formModel.map((v) => {
       const item = { ...v };
-      item.show = typeof item.show !== 'function' ? item.show : () => true;
+      item.show = typeof item.show !== 'function' ? () => true : item.show;
       item.disabled = item.hasOwnProperty('disabled') || (() => false);
       if (item.render) {
         item.render = item.render.bind(this);
