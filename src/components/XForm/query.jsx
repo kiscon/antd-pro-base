@@ -25,18 +25,18 @@ const ComponetsMap = {
   checkBoxGroup: ProFormCheckbox.Group,
   dateRange: ProFormDateRangePicker,
   dateTimeRange: ProFormDateTimeRangePicker,
-}
+};
 
 class QueryForm extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       formConfig: {
         layout: 'horizontal',
         autoComplete: 'off',
       },
-      formData: {}
-    }
+      formData: {},
+    };
     this.ceateElement = this.ceateElement.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
@@ -44,40 +44,42 @@ class QueryForm extends Component {
   render() {
     const formConfig = {
       ...this.state.formConfig,
-      ...(this.props.options || {})
-    }
-    let formModel = this.props.formModel || []
-    formModel = formModel.map(v => {
-      let item = { ...v }
-      typeof item.show !== 'function' && (item.show = () => true)
-      item.hasOwnProperty('disabled') || (item.disabled = () => false)
-      item.render && (item.render = item.render.bind(this))
-      return item
-    })
+      ...(this.props.options || {}),
+    };
+    let formModel = this.props.formModel || [];
+    formModel = formModel.map((v) => {
+      const item = { ...v };
+      item.show = typeof item.show !== 'function' ? item.show : () => true;
+      item.disabled = item.hasOwnProperty('disabled') || (() => false);
+      if (item.render) {
+        item.render = item.render.bind(this);
+      }
+      return item;
+    });
     return (
-      <QueryFilter
-        className="queryFilter"
-        {...formConfig}
-        onValuesChange={(curVal, values) => this.handleChange(curVal, values)}
-      >
-        {
-          formModel.map((v, index) => (
-            v.show(this.state.formData, this.props.formModel) ? this.ceateElement(v, index) : null
-          ))
-        }
-      </QueryFilter>
-    )
+      <div className="query-filter">
+        <QueryFilter
+          {...formConfig}
+          onValuesChange={(curVal, values) => this.handleChange(curVal, values)}
+        >
+          {formModel.map((v, index) =>
+            v.show(this.state.formData, this.props.formModel) ? this.ceateElement(v, index) : null,
+          )}
+        </QueryFilter>
+      </div>
+    );
   }
 
   componentDidMount() {
-    this.props.onRef && this.props.onRef(this)
+    this.props.onRef?.(this);
   }
 
-  ceateElement(v, index) {
-    const Component = v.render ? v.render : ComponetsMap[v.type]
-    v.disabled = this.setDisabled(v, this.state.formData)
+  ceateElement(item, index) {
+    const v = { ...item };
+    const Com = v.render ? v.render : ComponetsMap[v.type];
+    v.disabled = this.setDisabled(v, this.state.formData);
     return (
-      <Component
+      <Com
         key={v.prop || index}
         name={v.prop}
         label={v.label}
@@ -85,47 +87,50 @@ class QueryForm extends Component {
         disabled={v.disabled}
         placeholder={this.setPlaceholder(v)}
         {...(v.attrs || {})}
-      >
-      </Component>
-    )
+      ></Com>
+    );
   }
 
   handleChange(curVal, values) {
-    this.setState({
-      formData: {
-        ...this.state.formData,
-        ...curVal
-      }
-    }, () => {
-      this.props.onValuesChange && this.props.onValuesChange(curVal, values)
-    })
+    this.setState(
+      {
+        formData: {
+          ...this.state.formData,
+          ...curVal,
+        },
+      },
+      () => {
+        this.props.onValuesChange?.(curVal, values);
+      },
+    );
   }
 
   setDisabled(v, data) {
     if (v.disabled && typeof v.disabled === 'function') {
-      return v.disabled(data)
+      return v.disabled(data);
     }
-    return !!v.disabled
+    return !!v.disabled;
   }
 
   setPlaceholder(v) {
     if (v.attrs && v.attrs.hasOwnProperty('placeholder')) {
-      return v.attrs.placeholder
+      return v.attrs.placeholder;
     }
     if (v.type === 'input') {
-      return `请输入${v.label}`
+      return `请输入${v.label}`;
     }
-    return {
-      select: `请选择${v.label}`,
-      date: `请选择${v.label}`,
-      dateTime: `请选择${v.label}`,
-      dateYear: `请选择${v.label}`,
-      dateMonth: `请选择${v.label}`,
-      dateRange: [`请选择`, `请选择`],
-      dateTimeRange: [`请选择`, `请选择`],
-    }[v.type] || '请选择'
+    return (
+      {
+        select: `请选择${v.label}`,
+        date: `请选择${v.label}`,
+        dateTime: `请选择${v.label}`,
+        dateYear: `请选择${v.label}`,
+        dateMonth: `请选择${v.label}`,
+        dateRange: [`请选择`, `请选择`],
+        dateTimeRange: [`请选择`, `请选择`],
+      }[v.type] || '请选择'
+    );
   }
-
 }
 
 export default QueryForm;
