@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import { Button } from 'antd';
 import { PageContainer } from '@ant-design/pro-layout';
 import BaseDetail from '@/components/XForm/detail';
@@ -63,60 +63,31 @@ const dataList = [
   },
 ];
 
-// class Detail extends Component {
-//   state = {
-//     formData: {
-//       name: '前端技术',
-//       useMode: 'chapter'
-//     }
-//   }
+class Detail extends Component {
+  state = {
+    formData: {
+      name: '前端技术',
+      useMode: 'chapter',
+    },
+  };
 
-//   render() {
-//     return (
-//       <PageContainer
-//         ghost
-//         header={{
-//           title: '基础详情',
-//         }}
-//         style={{
-//           backgroundColor: '#fff',
-//           padding: 24
-//         }}
-//       >
-//         <BaseDetail
-//           configs={configs}
-//           formData={this.state.formData}
-//         />
-//         <InfoList
-//           list={dataList}
-//           col={'2'}
-//         />
-//       </PageContainer>
-//     );
-//   }
-// }
-
-const Detail = () => {
-  const [formData] = useState({
-    name: '前端技术',
-    useMode: 'chapter',
-  });
-
-  return (
-    <PageContainer
-      ghost
-      header={{
-        title: '基础详情',
-      }}
-      style={{
-        backgroundColor: '#fff',
-        padding: 24,
-      }}
-    >
-      <BaseDetail configs={configs} formData={formData} />
-      <InfoList list={dataList} col={'2'} />
-    </PageContainer>
-  );
-};
+  render() {
+    return (
+      <PageContainer
+        ghost
+        header={{
+          title: '基础详情',
+        }}
+        style={{
+          backgroundColor: '#fff',
+          padding: 24,
+        }}
+      >
+        <BaseDetail configs={configs} formData={this.state.formData} />
+        <InfoList list={dataList} col={'2'} />
+      </PageContainer>
+    );
+  }
+}
 
 export default Detail;

@@ -106,7 +106,7 @@ export default [
                     name: 'detailform',
                     // 不显示详情页菜单
                     // hideInMenu: true,
-                    component: './apply/BaseDetail',
+                    component: './Apply/BaseDetail',
                   },
                   {
                     path: '/apply/base-map',
