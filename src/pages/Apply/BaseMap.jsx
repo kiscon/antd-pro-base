@@ -8,9 +8,7 @@ const formList = [
     type: 'input',
     label: '姓名',
     prop: 'pname',
-    rules: [
-      { required: true, message: '必填项' }
-    ]
+    rules: [{ required: true, message: '必填项' }],
   },
   {
     type: 'input',
@@ -18,8 +16,8 @@ const formList = [
     prop: 'loginName',
     disabled: (v) => {
       // console.log(v);
-      return !v.pname
-    }
+      return !v.pname;
+    },
   },
   {
     type: 'input',
@@ -27,12 +25,12 @@ const formList = [
     prop: 'repassword',
     disabled: true,
     show: (v) => !!v.pname,
-    attrs: {}
+    attrs: {},
   },
   {
     type: 'input',
     label: '电子邮箱',
-    prop: 'email'
+    prop: 'email',
   },
   {
     type: 'input',
@@ -42,7 +40,7 @@ const formList = [
   {
     type: 'date',
     label: '日期',
-    prop: 'createTime'
+    prop: 'createTime',
   },
   {
     type: 'dateRange',
@@ -51,24 +49,24 @@ const formList = [
     attrs: {
       transform: (value) => ({
         startTime: value[0],
-        endTime: value[1]
-      })
-    }
+        endTime: value[1],
+      }),
+    },
   },
   {
     type: 'dateYear',
     label: '年份',
-    prop: 'year'
+    prop: 'year',
   },
   {
     type: 'dateMonth',
     label: '月份',
-    prop: 'month'
+    prop: 'month',
   },
   {
     type: 'dateTime',
     label: '时间',
-    prop: 'selectTime'
+    prop: 'selectTime',
   },
   {
     type: 'select',
@@ -78,8 +76,8 @@ const formList = [
       valueEnum: {
         yes: '启用',
         no: '禁用',
-      }
-    }
+      },
+    },
   },
   {
     type: 'radioGroup',
@@ -90,9 +88,9 @@ const formList = [
         { label: '每周', value: 'weekly' },
         { label: '每季度', value: 'quarterly' },
         { label: '每月', value: 'monthly' },
-        { label: '每年', value: 'yearly' }
-      ]
-    }
+        { label: '每年', value: 'yearly' },
+      ],
+    },
   },
   {
     type: 'checkBoxGroup',
@@ -102,41 +100,35 @@ const formList = [
       options: [
         { label: '农业', value: 'weekly' },
         { label: '制造业', value: 'quarterly' },
-        { label: '互联网', value: 'monthly' }
-      ]
-    }
+        { label: '互联网', value: 'monthly' },
+      ],
+    },
   },
-  
-]
+];
 
 const BaseMap = () => {
   const form = createRef();
-  const [formModel, setFormModel] = useState(formList);
+  const [formModel] = useState(formList);
   const [map, setMap] = useState(null);
 
   const initMap = () => {
-    const map = new AMap.Map('Map', {
+    const amap = new AMap.Map('Map', {
       resizeEnable: true,
       center: [117.000923, 36.675807],
       zoom: 5,
-      expandZoomRange: true
-    })
-    AMap.plugin([
-      'AMap.ToolBar',
-      'AMap.Scale'
-    ], () => {
-      map.addControl(new AMap.ToolBar())
-      map.addControl(new AMap.Scale())
-    })
-    setMap(map)
-  }
+      expandZoomRange: true,
+    });
+    setMap(amap);
+    AMap.plugin(['AMap.ToolBar', 'AMap.Scale'], () => {
+      map.addControl(new AMap.ToolBar());
+      map.addControl(new AMap.Scale());
+    });
+  };
 
   useEffect(() => {
-    aMapAk().then(_ => initMap())
-  }, [])
+    aMapAk().then(() => initMap());
+  }, []);
 
-
-  
   return (
     <PageContainer
       ghost
@@ -150,22 +142,20 @@ const BaseMap = () => {
         options={{
           onFinish: async (val) => {
             console.log(val);
-          }
+          },
         }}
-      >
-      </QueryForm>
+      ></QueryForm>
       <div
         id="Map"
         style={{
           height: 500,
           width: '100%',
           backgroundColor: '#f5f6f8',
-          marginTop: 24
+          marginTop: 24,
         }}
-      >
-      </div>
+      ></div>
     </PageContainer>
-  )
-}
+  );
+};
 
 export default BaseMap;
