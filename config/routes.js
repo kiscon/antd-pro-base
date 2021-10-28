@@ -41,7 +41,7 @@ export default [
                     icon: 'smile',
                     component: './Welcome',
                   },
-                ]
+                ],
               },
               // list
               {
@@ -53,7 +53,7 @@ export default [
                     path: '/list/table-list',
                     name: 'searchtable',
                     component: './TableList',
-                  }
+                  },
                 ],
               },
               // exception
@@ -106,11 +106,16 @@ export default [
                     name: 'detailform',
                     // 不显示详情页菜单
                     // hideInMenu: true,
-                    component: './apply/baseDetail',
+                    component: './Apply/BaseDetail',
+                  },
+                  {
+                    path: '/apply/base-map',
+                    name: 'searchmap',
+                    component: './Apply/BaseMap',
                   },
                 ],
               },
-            ]
+            ],
           },
           {
             component: './404',

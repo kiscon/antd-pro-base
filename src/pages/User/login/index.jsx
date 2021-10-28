@@ -1,17 +1,10 @@
-import {
-  AlipayCircleOutlined,
-  LockTwoTone,
-  MailTwoTone,
-  MobileTwoTone,
-  TaobaoCircleOutlined,
-  UserOutlined,
-  WeiboCircleOutlined,
-} from '@ant-design/icons';
-import { Alert, Space, message, Tabs } from 'antd';
+import { LockTwoTone, MailTwoTone, MobileTwoTone, UserOutlined } from '@ant-design/icons';
+import { Alert, message, Tabs } from 'antd';
 import React, { useState } from 'react';
 import ProForm, { ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
 import { useIntl, connect, FormattedMessage } from 'umi';
 import { getFakeCaptcha } from '@/services/login';
+import { aesEncrypt } from '@/utils/crypto';
 import styles from './index.less';
 
 const LoginMessage = ({ content }) => (
@@ -34,11 +27,24 @@ const Login = (props) => {
   const handleSubmit = (values) => {
     const { dispatch } = props;
     dispatch({
-      type: 'login/login',
-      payload: { ...values, type },
+      type: 'login/loginFn',
+      payload: { ...values },
     });
   };
 
+  // const handleSubmitMock = (v) => {
+  //   const { dispatch } = props;
+  //   const values = {
+  //     autoLogin: v.autoLogin,
+  //     password: v.password,
+  //     type: 'account',
+  //     userName: v.account,
+  //   }
+  //   dispatch({
+  //     type: 'login/login',
+  //     payload: { ...values },
+  //   });
+  // };
   return (
     <div className={styles.main}>
       <ProForm
@@ -56,7 +62,12 @@ const Login = (props) => {
           },
         }}
         onFinish={(values) => {
-          handleSubmit(values);
+          // console.log(values);
+          // handleSubmitMock(values);
+          handleSubmit({
+            password: aesEncrypt(values.password),
+            account: values.account,
+          });
           return Promise.resolve();
         }}
       >
@@ -88,15 +99,12 @@ const Login = (props) => {
         {type === 'account' && (
           <>
             <ProFormText
-              name="userName"
+              name="account"
               fieldProps={{
                 size: 'large',
                 prefix: <UserOutlined className={styles.prefixIcon} />,
               }}
-              placeholder={intl.formatMessage({
-                id: 'pages.login.username.placeholder',
-                defaultMessage: '用户名: admin or user',
-              })}
+              placeholder="用户名: admin"
               rules={[
                 {
                   required: true,
@@ -115,10 +123,7 @@ const Login = (props) => {
                 size: 'large',
                 prefix: <LockTwoTone className={styles.prefixIcon} />,
               }}
-              placeholder={intl.formatMessage({
-                id: 'pages.login.password.placeholder',
-                defaultMessage: '密码: ant.design',
-              })}
+              placeholder="密码: ant.design"
               rules={[
                 {
                   required: true,
@@ -236,12 +241,6 @@ const Login = (props) => {
           </a>
         </div>
       </ProForm>
-      <Space className={styles.other}>
-        <FormattedMessage id="pages.login.loginWith" defaultMessage="其他登录方式" />
-        <AlipayCircleOutlined className={styles.icon} />
-        <TaobaoCircleOutlined className={styles.icon} />
-        <WeiboCircleOutlined className={styles.icon} />
-      </Space>
     </div>
   );
 };
