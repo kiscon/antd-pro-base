@@ -109,7 +109,6 @@ const formList = [
 const BaseMap = () => {
   const form = createRef();
   const [formModel] = useState(formList);
-  const [map, setMap] = useState(null);
 
   const initMap = () => {
     const amap = new AMap.Map('Map', {
@@ -118,10 +117,9 @@ const BaseMap = () => {
       zoom: 5,
       expandZoomRange: true,
     });
-    setMap(amap);
     AMap.plugin(['AMap.ToolBar', 'AMap.Scale'], () => {
-      map.addControl(new AMap.ToolBar());
-      map.addControl(new AMap.Scale());
+      amap.addControl(new AMap.ToolBar());
+      amap.addControl(new AMap.Scale());
     });
   };
 
