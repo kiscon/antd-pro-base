@@ -118,6 +118,11 @@ export default [
                     name: 'formquery',
                     component: './Apply/FormQuery',
                   },
+                  {
+                    path: '/apply/base-chart',
+                    name: 'basechart',
+                    component: './Apply/BaseChart',
+                  },
                 ],
               },
             ],
