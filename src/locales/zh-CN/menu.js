@@ -58,4 +58,5 @@ export default {
   'menu.apply.searchtable': '基础表格',
   'menu.apply.detailform': '基础详情',
   'menu.apply.searchmap': '基础地图',
+  'menu.apply.formquery': '查询表单'
 };

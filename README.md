@@ -12,18 +12,34 @@ This project is initialized with [Ant Design Pro](https://pro.ant.design). Follo
 > Ant Design Pro 是一个企业级中后台前端/设计解决方案。
 
 ## 组件列表
+
 - SettingDrawer 布局设置
 - Message 提示信息
 - InfoList 信息列表
 - ExportDropdown 导出选择列表
-- XForm 新增/修改表单、详情表单、查询表单
-
+- XForm 新增/修改表单
+- FormDetail 详情表单
+- FormQuery 查询表单
+- SvgIcon SVG图标
 ## 页面
+
 - baseDetail 基础详情
 - baseForm 基础表单(基于Form和ProForm开发)
 - baseList 基础列表
 - baseMap 基础地图
 - Exception 异常页(403/404/500)
+
+## git hook
+
+```json
+"lint-staged": {
+  "**/*.less": "stylelint --syntax less",
+  "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
+  "**/*.{js,jsx,tsx,ts,less,md,json}": [
+    "prettier --write"
+  ]
+},
+```
 ## Environment Prepare
 
 Install `node_modules`:

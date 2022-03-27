@@ -113,6 +113,11 @@ export default [
                     name: 'searchmap',
                     component: './Apply/BaseMap',
                   },
+                  {
+                    path: '/apply/form-query',
+                    name: 'formquery',
+                    component: './Apply/FormQuery',
+                  },
                 ],
               },
             ],

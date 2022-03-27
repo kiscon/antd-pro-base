@@ -7,7 +7,7 @@ import ProForm, {
   ProFormDatePicker,
 } from '@ant-design/pro-form';
 import { PageContainer } from '@ant-design/pro-layout';
-import ShowMsg from '@/components/Message';
+import ShowMsg from '@/components/ShowMsg';
 import XForm from '@/components/XForm';
 
 const formList = [

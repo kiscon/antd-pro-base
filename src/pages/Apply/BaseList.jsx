@@ -6,7 +6,7 @@ import ProTable from '@ant-design/pro-table';
 import { PlusOutlined, CloudUploadOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-layout';
 import { queryRule, updateRule, addRule, removeRule } from './service';
-import ShowMsg from '@/components/Message';
+import ShowMsg from '@/components/ShowMsg';
 import ExportDropdown from '@/components/ExportDropdown';
 
 /**
