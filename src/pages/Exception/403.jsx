@@ -11,7 +11,7 @@ const Exception403 = () => {
       linkElement={Link}
       backText={formatMessage({ id: 'app.exception.back' })}
     />
-  )
+  );
 };
 
 export default Exception403;

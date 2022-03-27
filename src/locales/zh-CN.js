@@ -37,5 +37,5 @@ export default {
   ...component,
   ...editor,
   ...system,
-  ...pages
+  ...pages,
 };

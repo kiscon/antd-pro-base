@@ -5,15 +5,15 @@ class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hasError: false
+      hasError: false,
     };
   }
 
   static getDerivedStateFromError() {
     // 更新 state 使下一次渲染能够显示降级后的 UI
     return {
-      hasError: true
-    }
+      hasError: true,
+    };
   }
 
   componentDidCatch(error, errorInfo) {

@@ -16,16 +16,16 @@ export default forwardRef(function QForm(props, ref) {
     validate(...args) {
       return form.validateFields(...args);
     },
-    setValue
+    setValue,
   }));
   function setValue(key, v, vstr) {
     Object.assign(
       formData,
       { [key]: v },
-      vstr && typeof vstr === 'string' ? { [key + 'Str']: vstr } : {}
+      vstr && typeof vstr === 'string' ? { [key + 'Str']: vstr } : {},
     );
     form.setFieldsValue({
-      [key]: v
+      [key]: v,
     });
   }
   function Child(props) {

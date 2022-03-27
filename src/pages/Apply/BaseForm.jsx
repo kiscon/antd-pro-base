@@ -15,9 +15,7 @@ const formList = [
     type: 'input',
     label: '姓名',
     prop: 'pname',
-    rules: [
-      { required: true, message: '必填项' }
-    ]
+    rules: [{ required: true, message: '必填项' }],
   },
   {
     type: 'input',
@@ -25,8 +23,8 @@ const formList = [
     prop: 'loginName',
     disabled: (v) => {
       // console.log(v);
-      return !v.pname
-    }
+      return !v.pname;
+    },
   },
   {
     type: 'input',
@@ -34,12 +32,12 @@ const formList = [
     prop: 'repassword',
     disabled: true,
     show: (v) => !!v.pname,
-    attrs: {}
+    attrs: {},
   },
   {
     type: 'input',
     label: '电子邮箱',
-    prop: 'email'
+    prop: 'email',
   },
   {
     type: 'input',
@@ -49,12 +47,12 @@ const formList = [
   {
     type: 'date',
     label: '日期',
-    prop: 'createTime'
+    prop: 'createTime',
   },
   {
     type: 'textarea',
     label: '备注',
-    prop: 'reamrk'
+    prop: 'reamrk',
   },
   {
     type: 'select',
@@ -62,10 +60,10 @@ const formList = [
     prop: 'status',
     options: [
       { label: '启用', vlaue: 'yes' },
-      { label: '禁用', vlaue: 'no' }
-    ]
-  }
-]
+      { label: '禁用', vlaue: 'no' },
+    ],
+  },
+];
 
 const BaseForm = () => {
   let [formModel, setFormModel] = useState(formList);
@@ -91,18 +89,18 @@ const BaseForm = () => {
             func: async () => {
               let valid = await form.current.validate();
               console.log(valid);
-            }
+            },
           },
           {
             label: '重置',
-            func: () => form.current?.reset()
-          }
+            func: () => form.current?.reset(),
+          },
         ]}
         options={{
           style: {
             backgroundColor: '#fff',
-            padding: 24
-          }
+            padding: 24,
+          },
         }}
       />
       <h3>ProForm</h3>
@@ -111,7 +109,7 @@ const BaseForm = () => {
         layout="horizontal"
         style={{
           backgroundColor: '#fff',
-          padding: 24
+          padding: 24,
         }}
         initialValues={{
           name: '前端技术团队',
@@ -134,21 +132,21 @@ const BaseForm = () => {
                 <Col span={3}></Col>
                 <Button type="primary" key="submit" onClick={() => props.form?.submit?.()}>
                   提交
-                </Button>,
-                <Button key="rest" style={{marginLeft: 10}} onClick={() => props.form?.resetFields()}>
+                </Button>
+                ,
+                <Button
+                  key="rest"
+                  style={{ marginLeft: 10 }}
+                  onClick={() => props.form?.resetFields()}
+                >
                   重置
                 </Button>
               </Row>
-            )
+            );
           },
         }}
       >
-        <ProFormText
-          width="md"
-          name="name"
-          label="签约客户名称"
-          placeholder="请输入名称"
-        />
+        <ProFormText width="md" name="name" label="签约客户名称" placeholder="请输入名称" />
         <ProFormDateRangePicker
           transform={(values) => {
             return {

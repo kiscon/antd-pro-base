@@ -4,7 +4,7 @@ import { connect } from 'umi';
 import styles from './style.less';
 
 // 将model和component串联起来，即将models中的state绑定到组件的props中。并提供一些额外的功能，如dispatch
-@connect(state => ({
+@connect((state) => ({
   isloading: state.error.isloading,
 }))
 class TriggerException extends PureComponent {
@@ -12,7 +12,7 @@ class TriggerException extends PureComponent {
     isloading: false,
   };
 
-  triggerError = code => {
+  triggerError = (code) => {
     this.setState({
       isloading: true,
     });

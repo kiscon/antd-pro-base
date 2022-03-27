@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Spin } from 'antd';
 import './index.less';
 
-const Loading = props => {
+const Loading = (props) => {
   return (
     <div className="x-loading">
       <Spin {...props}></Spin>
@@ -13,12 +13,12 @@ const Loading = props => {
 
 Loading.propTypes = {
   tip: PropTypes.string,
-  size: PropTypes.string
+  size: PropTypes.string,
 };
 
 Loading.defaultProps = {
   tip: '加载中...',
-  size: 'small'
+  size: 'small',
 };
 
 export default Loading;

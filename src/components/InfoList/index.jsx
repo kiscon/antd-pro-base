@@ -8,50 +8,38 @@ class InfoList extends Component {
   }
 
   render() {
-    return (
-      <div className="detail-list">
-        { this.setLayout() }
-      </div>
-    );
+    return <div className="detail-list">{this.setLayout()}</div>;
   }
 
   setLayout() {
-    const { list, col } = this.props
+    const { list, col } = this.props;
     if (col === '2') {
       return (
         <div className="base-info">
           <ul className="info-list list-left">
-            {
-              list.map((v, index) => {
-                return index % 2 === 0 ? <li key={v.key}>{ this.setListItem(v) }</li> : null
-              })
-            }
+            {list.map((v, index) => {
+              return index % 2 === 0 ? <li key={v.key}>{this.setListItem(v)}</li> : null;
+            })}
           </ul>
-          {
-            list.length > 1 ? (
-              <div className="list-right">
-                <ul className="info-list">
-                  {
-                    list.map((v, index) => {
-                      return index % 2 !== 0 ? <li key={v.key}>{ this.setListItem(v) }</li> : null
-                    })
-                  }
-                </ul>
-              </div>
-            ) : null
-          }
+          {list.length > 1 ? (
+            <div className="list-right">
+              <ul className="info-list">
+                {list.map((v, index) => {
+                  return index % 2 !== 0 ? <li key={v.key}>{this.setListItem(v)}</li> : null;
+                })}
+              </ul>
+            </div>
+          ) : null}
         </div>
-      )
+      );
     } else {
       return (
         <ul className="info-list">
-          {
-            list.map((v, index) => {
-              return <li key={v.key}>{ this.setListItem(v) }</li>
-            })
-          }
+          {list.map((v, index) => {
+            return <li key={v.key}>{this.setListItem(v)}</li>;
+          })}
         </ul>
-      )
+      );
     }
   }
 
@@ -61,7 +49,7 @@ class InfoList extends Component {
         <div className="t-title">{v.label}</div>
         <div className="t-content">{this.fmtContent(v)}</div>
       </div>
-    )
+    );
   }
 
   fmtContent(v) {
@@ -73,17 +61,16 @@ class InfoList extends Component {
       return v.value;
     }
   }
-
 }
 
 InfoList.propTypes = {
   col: PropTypes.string,
-  list: PropTypes.array
-}
+  list: PropTypes.array,
+};
 
 InfoList.defaultProps = {
   col: '1',
-  list: []
-}
+  list: [],
+};
 
 export default InfoList;

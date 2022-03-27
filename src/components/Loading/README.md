@@ -9,5 +9,3 @@ import Loading from '@/components/Loading';
 ```jsx
 <Loading />
 ```
-
-

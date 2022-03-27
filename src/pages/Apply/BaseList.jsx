@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { useIntl, FormattedMessage } from 'umi';
 import { Button, message, Input, Drawer } from 'antd';
@@ -85,7 +84,7 @@ const BaseList = () => {
     {
       title: '序号',
       dataIndex: 'index',
-      valueType: 'index'
+      valueType: 'index',
     },
     {
       title: '规则名称',
@@ -108,23 +107,26 @@ const BaseList = () => {
       dataIndex: 'callNo',
       sorter: true,
       hideInSearch: true, // 在查询表单中不展示此项
-      renderText: (val, row, index) => { // 格式数据
-        return val
-      }
+      renderText: (val, row, index) => {
+        // 格式数据
+        return val;
+      },
     },
     {
       title: '描述',
       dataIndex: 'desc',
       valueType: 'textarea',
-      render: (_, row, index) => { // 渲染jsx
-        return row.desc
-      }
+      render: (_, row, index) => {
+        // 渲染jsx
+        return row.desc;
+      },
     },
     {
       title: '状态',
       dataIndex: 'status',
       valueType: 'select',
-      valueEnum: { // 枚举列表
+      valueEnum: {
+        // 枚举列表
         0: {
           text: '关闭',
           status: 'Default',
@@ -188,17 +190,13 @@ const BaseList = () => {
           type="link"
           key="edit"
           onClick={() => {
-            ShowMsg('操作编辑')
+            ShowMsg('操作编辑');
             // setCurrentRow(row);
           }}
         >
           编辑
         </Button>,
-        <Button
-          type="link"
-          key="show"
-          onClick={() => ShowMsg('操作查看')}
-        >
+        <Button type="link" key="show" onClick={() => ShowMsg('操作查看')}>
           查看
         </Button>,
       ],
@@ -214,23 +212,13 @@ const BaseList = () => {
           labelWidth: 120,
         }}
         toolBarRender={() => [
-          <Button
-            type="primary"
-            icon={<PlusOutlined />}
-            onClick={() => {
-            }}
-          >
+          <Button type="primary" icon={<PlusOutlined />} onClick={() => {}}>
             新增
           </Button>,
-          <Button
-            icon={<CloudUploadOutlined />}
-            onClick={() => ShowMsg('操作上传')}
-          >
+          <Button icon={<CloudUploadOutlined />} onClick={() => ShowMsg('操作上传')}>
             上传
           </Button>,
-          <ExportDropdown
-            onChange={(v) => ShowMsg(`${v}--操作导出`)}
-          />,
+          <ExportDropdown onChange={(v) => ShowMsg(`${v}--操作导出`)} />,
           <Button
             disabled={!selectedRowsState.length}
             onClick={async () => {
@@ -240,7 +228,7 @@ const BaseList = () => {
             }}
           >
             批量删除
-          </Button>
+          </Button>,
         ]}
         request={(params, sorter, filter) => queryRule({ ...params, sorter, filter })}
         columns={columns}

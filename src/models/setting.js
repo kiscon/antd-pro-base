@@ -2,7 +2,7 @@ import { message } from 'antd';
 import defaultSettings from '../../config/defaultSettings';
 
 let lessNodesAppended;
-const updateTheme = primaryColor => {
+const updateTheme = (primaryColor) => {
   // Don't compile less in production!
   // preview.pro.ant.design only do not use in your production ; preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
   // if (ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION !== 'site') {
@@ -75,7 +75,7 @@ const SettingModel = {
     changeSetting(state = defaultSettings, { payload }) {
       const { primaryColor, colorWeak, contentWidth } = payload;
       if (state.primaryColor !== primaryColor) {
-        console.log(payload)
+        console.log(payload);
         updateTheme(primaryColor);
       }
       if (state.contentWidth !== contentWidth && window.dispatchEvent) {

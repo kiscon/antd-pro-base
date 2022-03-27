@@ -20,7 +20,7 @@ const Body = ({ children, title, style }) => (
   </div>
 );
 
-const renderLayoutSettingItem = item => {
+const renderLayoutSettingItem = (item) => {
   const action = React.cloneElement(item.action, {
     disabled: item.disabled,
   });
@@ -33,12 +33,11 @@ const renderLayoutSettingItem = item => {
   );
 };
 
-
 const SettingDrawer = (props) => {
   const { dispatch, settings } = props;
   const { navTheme, primaryColor, layout, colorWeak } = settings;
   const { formatMessage } = useIntl();
-  const [ collapse, setCollapse ] = useState(false);
+  const [collapse, setCollapse] = useState(false);
 
   const togglerContent = () => {
     const isCollapsed = !collapse;
@@ -56,10 +55,10 @@ const SettingDrawer = (props) => {
     if (dispatch) {
       dispatch({
         type: 'settings/changeSetting',
-        payload: nextState
+        payload: nextState,
       });
     }
-  }
+  };
 
   const getLayoutSetting = (props) => {
     const {
@@ -73,7 +72,7 @@ const SettingDrawer = (props) => {
           <Select
             value={contentWidth}
             size="small"
-            onSelect={value => changeSetting('contentWidth', value)}
+            onSelect={(value) => changeSetting('contentWidth', value)}
             style={{ width: 80 }}
           >
             {layout === 'sidemenu' ? null : (
@@ -93,7 +92,7 @@ const SettingDrawer = (props) => {
           <Switch
             size="small"
             checked={!!fixedHeader}
-            onChange={checked => changeSetting('fixedHeader', checked)}
+            onChange={(checked) => changeSetting('fixedHeader', checked)}
           />
         ),
       },
@@ -105,7 +104,7 @@ const SettingDrawer = (props) => {
           <Switch
             size="small"
             checked={!!autoHideHeader}
-            onChange={checked => changeSetting('autoHideHeader', checked)}
+            onChange={(checked) => changeSetting('autoHideHeader', checked)}
           />
         ),
       },
@@ -117,7 +116,7 @@ const SettingDrawer = (props) => {
           <Switch
             size="small"
             checked={!!fixSiderbar}
-            onChange={checked => changeSetting('fixSiderbar', checked)}
+            onChange={(checked) => changeSetting('fixSiderbar', checked)}
           />
         ),
       },
@@ -131,7 +130,7 @@ const SettingDrawer = (props) => {
         onClick={togglerContent}
         style={collapse ? { right: '300px' } : { right: '0' }}
       >
-        { collapse ? <CloseOutlined /> : <SettingOutlined /> }
+        {collapse ? <CloseOutlined /> : <SettingOutlined />}
       </div>
       <Drawer
         visible={collapse}
@@ -158,7 +157,7 @@ const SettingDrawer = (props) => {
                 },
               ]}
               value={navTheme}
-              onChange={value => changeSetting('navTheme', value)}
+              onChange={(value) => changeSetting('navTheme', value)}
             />
           </Body>
           {/* <ThemeColor
@@ -182,9 +181,9 @@ const SettingDrawer = (props) => {
                 },
               ]}
               value={layout}
-              onChange={value => changeSetting('layout', value)}
+              onChange={(value) => changeSetting('layout', value)}
             />
-          </Body>  
+          </Body>
           <List
             split={false}
             dataSource={getLayoutSetting(props)}
@@ -202,7 +201,7 @@ const SettingDrawer = (props) => {
                     <Switch
                       size="small"
                       checked={!!colorWeak}
-                      onChange={checked => changeSetting('colorWeak', checked)}
+                      onChange={(checked) => changeSetting('colorWeak', checked)}
                     />
                   ),
                 },
@@ -213,7 +212,7 @@ const SettingDrawer = (props) => {
       </Drawer>
     </>
   );
-}
+};
 
 export default connect(({ global, settings }) => ({
   collapsed: global.collapsed,

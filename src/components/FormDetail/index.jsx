@@ -14,33 +14,24 @@ class BaseDetail extends Component {
     } else if (v.render) {
       return v.render(data, v.key);
     } else {
-      return data[v.key] || ''
+      return data[v.key] || '';
     }
   }
 
-  render() { 
+  render() {
     return (
       <>
-        <Form
-          layout="horizontal"
-        >
+        <Form layout="horizontal">
           <Row>
-            {
-              this.props.configs.map(v => {
-                return (
-                  <Col
-                    span={v.span || this.props.colSpan}
-                    key={v.key}
-                  >
-                    <Form.Item label={v.label}>
-                      <div>
-                        { this.fmtInfo(v) }
-                      </div>
-                    </Form.Item>
-                  </Col>
-                )
-              })
-            }
+            {this.props.configs.map((v) => {
+              return (
+                <Col span={v.span || this.props.colSpan} key={v.key}>
+                  <Form.Item label={v.label}>
+                    <div>{this.fmtInfo(v)}</div>
+                  </Form.Item>
+                </Col>
+              );
+            })}
           </Row>
         </Form>
       </>
@@ -52,14 +43,14 @@ class BaseDetail extends Component {
 BaseDetail.propTypes = {
   colSpan: PropTypes.number,
   configs: PropTypes.array,
-  formData: PropTypes.object
-}
+  formData: PropTypes.object,
+};
 
 // 设置默认值
 BaseDetail.defaultProps = {
   colSpan: 8,
   formData: {},
-  configs: []
-}
+  configs: [],
+};
 
 export default BaseDetail;

@@ -1,4 +1,4 @@
-## 项目SvgIcon组件
+## 项目 SvgIcon 组件
 
 ### 使用说明
 
@@ -10,5 +10,3 @@ import SvgIcon from '@/components/SvgIcon';
 <SvgIcon.Unbind />
 <SvgIcon.Upload />
 ```
-
-
